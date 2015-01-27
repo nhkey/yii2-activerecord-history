@@ -1,0 +1,19 @@
+{
+    "name": "nhkey/yii2-activerecord-history",
+    "description": "Storage history of changes to ActiveRecord",
+    "keywords": ["yii2", "history", "activerecord"],
+    "type": "yii2-extension",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Mikhail Mikhalev",
+            "email": "mail@mikhailmikhalev.ru"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": { "nhkey\\arh\\": "" }
+    }
+}
