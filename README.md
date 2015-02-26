@@ -46,8 +46,8 @@ change to
     class MyClass extends ActiveRecordHistory
 ```
 
-The model will be in private property $_historyProvider, which replies with a call for the Manager. If the property is not specified, the default manager DBManager.
-In the extension is two managers: DBManager and FileManager. You can extend the class BaseManager its classes.
+The model will have private property $_historyProvider, which replies with a call for the Manager. If the property is not specified, the default manager is DBManager.
+In the extension is two managers: DBManager and FileManager. You can extend the class BaseManager.
 
 Credits
 -------
