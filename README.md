@@ -12,7 +12,7 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist nhkey/yii2-activerecord-history "*"
+php composer.phar require nhkey/yii2-activerecord-history "*"
 ```
 
 or add
