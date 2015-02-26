@@ -15,7 +15,7 @@ use yii\di\Instance;
  * Class DBManager
  * @package nhkey\arh
  */
-class DBManager
+class DBManager extends BaseManager
 {
     public static $tableName = '{{%modelhistory}}';
 
