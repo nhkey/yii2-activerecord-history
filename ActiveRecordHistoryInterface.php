@@ -18,15 +18,15 @@ interface ActiveRecordHistoryInterface
      * @param integer $type
      * @param \yii\db\ActiveRecord $object
      * @param array $updatedFields
-     * @return void
+     * @param array $options
      */
-    public static function run($type, $object, $updatedFields = []);
+    public static function run($type, $object, $updatedFields = [], $options = []);
 
     /**
      * @param array $data
-     * @return void
+     * @param array $options
      */
-    public static function saveField($data);
+    public static function saveField($data, $options = []);
 
 
 }

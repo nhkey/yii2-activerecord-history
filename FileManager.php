@@ -24,9 +24,9 @@ class FileManager extends BaseManager
 
     /**
      * @param array $data
-     * @return void
+     * @param array $options
      */
-    public static function saveField($data)
+    public static function saveField($data, $options = [])
     {
         $typeName = self::getTypeName($data['type']);
         $inFile = "{$data['date']} {$typeName}: {$data['field_name']}({$data['field_id']})\r\n";
@@ -35,8 +35,8 @@ class FileManager extends BaseManager
             $inFile .= "New Value: {$data['new_value']}\r\n";
         }
         $inFile .= "------\r\n";
-        (new FileHelper())->createDirectory(self::$filePath);
-        file_put_contents(self::$filePath . self::getFileName($data), $inFile, FILE_APPEND);
+        (new FileHelper())->createDirectory($options['filename'] ?: self::$filePath);
+        file_put_contents(self::$filePath . self::getFileName($data), $inFile, FILE_APPEND | LOCK_EX);
     }
 
     /**

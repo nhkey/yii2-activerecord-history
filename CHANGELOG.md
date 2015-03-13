@@ -1,6 +1,16 @@
 Yii2-ActiveRecord-History Extension for Yii 2 ChangeLog
 ==============================================
 
+1.0.2-beta Mar 3, 2015
+-------------------------
+
+- Fixed FileManager: added lock for files
+- Added examples in README
+- Added file LICENCE.md
+- Added options for provider (ex. filename in FileManager).
+
+
+
 1.0.1-beta Feb 24, 2015
 -------------------------
 

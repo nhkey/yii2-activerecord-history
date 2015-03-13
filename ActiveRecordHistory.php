@@ -17,15 +17,21 @@ class ActiveRecordHistory extends \yii\db\ActiveRecord
      */
     protected $_historyProvider;
 
+    /**
+     * @var array
+     */
+    protected $_optionsHistoryProvider;
+
 
     public function afterSave($insert, $changedAttributes)
     {
-	$provider = ($this->_historyProvider) ? : $provider = 'nhkey\arh\DBManager';
+	    $provider = ($this->_historyProvider) ? : $provider = 'nhkey\arh\DBManager';
         $type = $insert ? FileManager::AR_INSERT : FileManager::AR_UPDATE;
 
         if ($this->getOldPrimaryKey() != $this->getPrimaryKey())
             $type = $provider::AR_UPDATE_PK;
-        $provider::run($type, $this, $changedAttributes);
+
+        $provider::run($type, $this, $changedAttributes, $this->_optionsHistoryProvider);
         return parent::afterSave($insert, $changedAttributes);
     }
 
@@ -33,7 +39,7 @@ class ActiveRecordHistory extends \yii\db\ActiveRecord
     {
         $provider = ($this->_historyProvider) ? : $provider = 'nhkey\arh\DBManager';
 
-        $provider::run($provider::AR_DELETE, $this);
+        $provider::run($provider::AR_DELETE, $this, [], $this->_optionsHistoryProvider);
         return parent::afterDelete();
     }
 

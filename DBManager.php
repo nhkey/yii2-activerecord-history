@@ -26,8 +26,9 @@ class DBManager extends BaseManager
 
     /**
      * @param array $data
+     * @param array $options
      */
-    public static function saveField($data)
+    public static function saveField($data, $options = [])
     {
 
         self::getDB()->createCommand()
