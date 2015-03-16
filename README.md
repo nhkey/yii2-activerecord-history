@@ -57,8 +57,8 @@ FileManager Provider:
     class MyClass extends \nhkey\arh\ActiveRecordHistory
     {
         $_historyProvider = '\nhkey\arh\FileManager'
-        $_options = [
-            'filename' => '/home/myfile',
+        $_optionsHistoryProvider = [
+            'filename' => '/home/user/MyClass.log',
             ];
         ...
     }

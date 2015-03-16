@@ -35,8 +35,9 @@ class FileManager extends BaseManager
             $inFile .= "New Value: {$data['new_value']}\r\n";
         }
         $inFile .= "------\r\n";
-        (new FileHelper())->createDirectory($options['filename'] ?: self::$filePath);
-        file_put_contents(self::$filePath . self::getFileName($data), $inFile, FILE_APPEND | LOCK_EX);
+        if (!$options['filename'])
+            (new FileHelper())->createDirectory(self::$filePath);
+        file_put_contents($options['filename'] ?: self::$filePath . self::getFileName($data), $inFile, FILE_APPEND | LOCK_EX);
     }
 
     /**
