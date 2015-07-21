@@ -35,15 +35,17 @@ class ActiveRecordHistoryBehavior extends Behavior
 
     public function saveHistory($event){
         $manager = new $this->manager;
-
+        $manager->setOptions($this->managerOptions);
         switch ($event->name){
             case BaseActiveRecord::EVENT_AFTER_INSERT:
                 $type = $manager::AR_INSERT;
+                $manager->setUpdatedFields($event->changedAttributes);
                 break;
             case BaseActiveRecord::EVENT_AFTER_UPDATE:
-                $type =  $this->owner->getOldPrimaryKey() != $this->owner->getPrimaryKey()
+                $type = $this->owner->getOldPrimaryKey() != $this->owner->getPrimaryKey()
                     ? $manager::AR_UPDATE_PK
                     : $manager::AR_UPDATE;
+                $manager->setUpdatedFields($event->changedAttributes);
                 break;
             case BaseActiveRecord::EVENT_AFTER_DELETE:
                 $type = $manager::AR_DELETE;
@@ -51,9 +53,7 @@ class ActiveRecordHistoryBehavior extends Behavior
             default:
                 throw new \Exception('Not found event!');
         }
-        $manager->setOptions($this->managerOptions)
-                 ->setUpdatedFields($event->changedAttributes)
-                 ->run($type, $this->owner);
+        $manager->run($type, $this->owner);
     }
 
 
