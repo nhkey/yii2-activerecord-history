@@ -32,7 +32,7 @@ class DBManager extends BaseManager
     {
 
         self::getDB()->createCommand()
-            ->insert($this->tableName, $data)->execute();
+            ->insert($this::$tableName, $data)->execute();
     }
 
     /**

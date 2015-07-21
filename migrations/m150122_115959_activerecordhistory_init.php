@@ -6,7 +6,7 @@
 
 use yii\db\Schema;
 use yii\db\Migration;
-use nhkey\arh\DBManager;
+use nhkey\arh\managers\DBManager;
 
 
 /**
