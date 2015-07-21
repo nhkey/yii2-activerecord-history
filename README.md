@@ -125,7 +125,7 @@ FileManager:
                     'class' => \nhkey\arh\ActiveRecordHistoryBehavior::className(),
                     'manager' => '\nhkey\arh\managers\FileManager',
                     'managerOptions' => [
-                        'filepath' => '/home/logs/',
+                        'filePath' => '/home/logs/',
                         'isGenerateFilename' => true
                     ],
                 ],

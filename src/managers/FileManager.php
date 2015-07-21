@@ -41,7 +41,7 @@ class FileManager extends BaseManager
         }
         else
             $filename = $this->getFileName($data);
-        file_put_contents($filename, $content, FILE_APPEND | LOCK_EX);
+        file_put_contents($this->filePath . $filename, $content, FILE_APPEND | LOCK_EX);
     }
 
     /**

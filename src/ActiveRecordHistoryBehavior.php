@@ -22,7 +22,7 @@ class ActiveRecordHistoryBehavior extends Behavior
     /**
      * @var array
      */
-    protected $managerOptions;
+    public $managerOptions;
 
     public function events()
     {

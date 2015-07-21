@@ -16,10 +16,8 @@ abstract class BaseManager implements ActiveRecordHistoryInterface
 
     public function setOptions($options){
         if (is_array($options)) {
-            foreach ($options as $optionKey => $optionValue){
-                if (property_exists(static::class, $this->{$optionKey}))
-                    $this->{$optionKey} = $optionValue;
-            }
+            foreach ($options as $optionKey => $optionValue)
+                $this->{$optionKey} = $optionValue;
         }
         return $this;
     }
@@ -32,8 +30,6 @@ abstract class BaseManager implements ActiveRecordHistoryInterface
     /**
      * @param integer $type
      * @param \yii\db\ActiveRecord $object
-     * @param array $updatedFields
-     * @param array $options
      */
     public function run($type, $object)
     {

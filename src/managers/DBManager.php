@@ -26,13 +26,12 @@ class DBManager extends BaseManager
 
     /**
      * @param array $data
-     * @param array $options
      */
     public function saveField($data)
     {
-
+        $table =  isset($this->tableName) ? $this->tableName : $this::$tableName;
         self::getDB()->createCommand()
-            ->insert($this::$tableName, $data)->execute();
+            ->insert($table, $data)->execute();
     }
 
     /**
