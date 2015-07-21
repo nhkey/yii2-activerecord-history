@@ -1,6 +1,15 @@
 Yii2-ActiveRecord-History Extension for Yii 2 ChangeLog
 ==============================================
 
+1.1.0 Jul 21, 2015
+-------------------------
+
+- Maybe use as behavior or as extend the class ActiveRecord
+- New structure
+- Refactoring
+- Rename provider to manager
+
+
 1.0.2-beta Mar 3, 2015
 -------------------------
 

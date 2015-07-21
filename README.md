@@ -32,6 +32,10 @@ php yii migrate --migrationPath=@vendors/nhkey/yii2-activerecord-history/migrati
 Usage
 -----
 
+If the property is not specified, the default manager is DBManager.
+In the extension is two managers: DBManager and FileManager. You can extend the class BaseManager.
+
+### 1) As extend the class ActiveRecord
 To use this extension, simply change the parent class from \yii\db\ActiveRecord to \nhkey\arh\ActiveRecordHistory 
 
 For example:
@@ -46,27 +50,26 @@ change to
     class MyClass extends ActiveRecordHistory
 ```
 
-The model will have private property $_historyProvider, which replies with a call for the Manager. If the property is not specified, the default manager is DBManager.
-In the extension is two managers: DBManager and FileManager. You can extend the class BaseManager.
+The model will have private property $_historyManager, which replies with a call for the Manager.
 
-### Example 1
+#### Example 1
 
-FileManager Provider:
+FileManager:
 
 ```php
     class MyClass extends \nhkey\arh\ActiveRecordHistory
     {
-        $_historyProvider = '\nhkey\arh\FileManager'
-        $_optionsHistoryProvider = [
+        $_historyManager = '\nhkey\arh\managers\FileManager'
+        $_optionsHistoryManager = [
             'filename' => '/home/user/MyClass.log',
             ];
         ...
     }
 ```
 
-### Example 2
+#### Example 2
 
-Simple DBManager Provider:
+DBManager:
 
 ```php
     class MyClass extends \nhkey\arh\ActiveRecordHistory
@@ -74,6 +77,102 @@ Simple DBManager Provider:
         ...
     }
 ```
+
+
+### 2) As behavior
+
+Easy way:
+ 
+```php
+    class MyClass extends ActiveRecord {
+     public function behaviors(){
+            return [
+                'history' => [
+                    'class' => \nhkey\arh\ActiveRecordHistoryBehavior::className(),
+                ],
+                ...
+            ];
+        }
+```
+
+If you want use not default manager or set options for manager, you may use this construction: 
+
+```php
+    class MyClass extends ActiveRecord {
+     public function behaviors(){
+            return [
+                'history' => [
+                    'class' => \nhkey\arh\ActiveRecordHistoryBehavior::className(),
+                    'manager' => 'ManagerName',
+                    'managerOptions' => [
+                        ...
+                    ],
+                ],
+                ...
+            ];
+        }
+```
+
+#### Example 1
+
+FileManager: 
+
+```php
+    class MyClass extends ActiveRecord {
+     public function behaviors(){
+            return [
+                'history' => [
+                    'class' => \nhkey\arh\ActiveRecordHistoryBehavior::className(),
+                    'manager' => '\nhkey\arh\managers\FileManager',
+                    'managerOptions' => [
+                        'filepath' => '/home/logs/',
+                        'isGenerateFilename' => true
+                    ],
+                ],
+                ...
+            ];
+        }
+```
+or
+
+```php
+    class MyClass extends ActiveRecord {
+     public function behaviors(){
+            return [
+                'history' => [
+                    'class' => \nhkey\arh\ActiveRecordHistoryBehavior::className(),
+                    'manager' => '\nhkey\arh\managers\FileManager',
+                    'managerOptions' => [
+                        'filename' => '/home/user/logs_app/MyClass.log',
+                    ],
+                ],
+                ...
+            ];
+        }
+```
+
+
+
+#### Example 2
+
+DBManager: 
+
+```php
+    class MyClass extends ActiveRecord {
+     public function behaviors(){
+            return [
+                'history' => [
+                    'class' => \nhkey\arh\ActiveRecordHistoryBehavior::className(),
+                    'manager' => '\nhkey\arh\managers\DBManager',
+                    'managerOptions' => [
+                        'tableName' => 'MyLogTable',
+                    ],
+                ],
+                ...
+            ];
+        }
+```
+
 
 Credits
 -------

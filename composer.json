@@ -14,6 +14,6 @@
         "yiisoft/yii2": "*"
     },
     "autoload": {
-        "psr-4": { "nhkey\\arh\\": "" }
+        "psr-4": { "nhkey\\arh\\": "src\\" }
     }
 }
