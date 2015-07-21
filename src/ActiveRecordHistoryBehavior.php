@@ -52,7 +52,7 @@ class ActiveRecordHistoryBehavior extends Behavior
                 throw new \Exception('Not found event!');
         }
         $manager->setOptions($this->managerOptions)
-                 ->setChangedAttributes($event->changedAttributes)
+                 ->setUpdatedFields($event->changedAttributes)
                  ->run($type, $this->owner);
     }
 

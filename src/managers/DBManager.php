@@ -17,12 +17,12 @@ use yii\di\Instance;
  */
 class DBManager extends BaseManager
 {
-    public $tableName = '{{%modelhistory}}';
+    public static $tableName = '{{%modelhistory}}';
 
     /**
      * @var string
      */
-    public $db = 'db';
+    public static $db = 'db';
 
     /**
      * @param array $data

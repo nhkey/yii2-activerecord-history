@@ -34,7 +34,7 @@ class ActiveRecordHistory extends \yii\db\ActiveRecord
             $type = $manager::AR_UPDATE_PK;
 
         $manager->setOptions($this->_optionsHistoryManager)
-                 ->setChangedAttributes($changedAttributes)
+                 ->setUpdatedFields($changedAttributes)
                  ->run($type, $this);
         return parent::afterSave($insert, $changedAttributes);
     }

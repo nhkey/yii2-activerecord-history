@@ -26,7 +26,7 @@ to the require section of your composer.json.
 If you are using DBManager as Manager, you need to run
 
 ```
-php yii migrate --migrationPath=@vendors/nhkey/yii2-activerecord-history/migrations
+php yii migrate --migrationPath=@vendor/nhkey/yii2-activerecord-history/migrations
 ```
 
 Usage
