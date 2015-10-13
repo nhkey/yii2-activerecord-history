@@ -59,7 +59,7 @@ abstract class BaseManager implements ActiveRecordHistoryInterface
         ];
 
         if ($this->saveUserId)
-            $data['user_id'] = Yii::$app->user->id;
+            $data['user_id'] = isset(Yii::$app->user->id) ?  Yii::$app->user->id : '';
 
         switch ($type) {
             case self::AR_INSERT:
