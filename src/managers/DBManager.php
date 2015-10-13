@@ -17,7 +17,8 @@ use yii\di\Instance;
  */
 class DBManager extends BaseManager
 {
-    public static $tableName = '{{%modelhistory}}';
+    public static $defaultTableName = '{{%modelhistory}}'; // static default for migration
+    public $tableName;
 
     /**
      * @var string
@@ -29,7 +30,8 @@ class DBManager extends BaseManager
      */
     public function saveField($data)
     {
-        $table =  isset($this->tableName) ? $this->tableName : $this::$tableName;
+        $table =  isset($this->tableName) ? $this->tableName : $this::$defaultTableName;
+        
         self::getDB()->createCommand()
             ->insert($table, $data)->execute();
     }
