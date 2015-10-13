@@ -12,9 +12,16 @@ use Yii;
 abstract class BaseManager implements ActiveRecordHistoryInterface
 {
 
+    /**
+     * @var array list of updated fields
+     */
     public $updatedFields;
 
-    public function setOptions($options){
+    /**
+     * @inheritdoc
+     */
+    public function setOptions($options)
+    {
         if (is_array($options)) {
             foreach ($options as $optionKey => $optionValue)
                 $this->{$optionKey} = $optionValue;
@@ -22,18 +29,20 @@ abstract class BaseManager implements ActiveRecordHistoryInterface
         return $this;
     }
 
-    public function setUpdatedFields($attributes){
+    /**
+     * @inheritdoc
+     */
+    public function setUpdatedFields($attributes)
+    {
         $this->updatedFields = $attributes;
         return $this;
     }
 
     /**
-     * @param integer $type
-     * @param \yii\db\ActiveRecord $object
+     * @inheritdoc
      */
     public function run($type, $object)
     {
-
         $pk = $object->primaryKey();
         $pk = $pk[0];
 

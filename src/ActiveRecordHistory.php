@@ -9,7 +9,11 @@ namespace nhkey\arh;
 use nhkey\arh\managers\BaseManager;
 use Yii;
 
-
+/**
+ * Class ActiveRecordHistory
+ * @package nhkey\arh
+ * @deprecated
+ */
 class ActiveRecordHistory extends \yii\db\ActiveRecord
 {
 

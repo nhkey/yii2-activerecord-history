@@ -1,6 +1,15 @@
 Yii2-ActiveRecord-History Extension for Yii 2 ChangeLog
 ==============================================
 
+1.1.1 Oct 13, 2015
+-------------------------
+
+- Add ignoreFields property (Issue #1)
+- Add minimum-stability in composer.json
+- Fixed codestyle
+- Add some changes in documentation
+- "As extend the class ActiveRecord" is deprecated now
+
 1.1.0 Jul 21, 2015
 -------------------------
 

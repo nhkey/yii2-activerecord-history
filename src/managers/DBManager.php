@@ -12,7 +12,7 @@ use yii\di\Instance;
 
 
 /**
- * Class DBManager
+ * Class DBManager for save history in DB
  * @package nhkey\arh
  */
 class DBManager extends BaseManager
