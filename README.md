@@ -33,7 +33,7 @@ Usage
 -----
 
 If the property is not specified, the default manager is DBManager.
-In the extension is two managers: [DBManager](https://github.com/nhkey/yii2-activerecord-history/blob/master/docs/en/managers.md#DBManager) and [FileManager](https://github.com/nhkey/yii2-activerecord-history/blob/master/docs/en/managers.md#FileManager). You can extend the class BaseManager. 
+In the extension is two managers: [DBManager](https://github.com/nhkey/yii2-activerecord-history/blob/master/docs/en/managers.md#dbmanager) and [FileManager](https://github.com/nhkey/yii2-activerecord-history/blob/master/docs/en/managers.md#filmanager). You can extend the class BaseManager. 
 
 There are two way how usage this extension:
  - [As behavior](https://github.com/nhkey/yii2-activerecord-history/blob/master/docs/en/usage-as-behavior.md)
