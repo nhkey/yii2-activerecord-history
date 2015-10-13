@@ -22,7 +22,7 @@ class m150122_115959_activerecordhistory_init extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable(DBManager::$tableName, [
+        $this->createTable(DBManager::$defaultTableName, [
             'id' => $this->bigPrimaryKey(),
             'date' => $this->datetime()->notNull(),
             'table' => $this->string()->notNull(),
@@ -33,9 +33,9 @@ class m150122_115959_activerecordhistory_init extends Migration
             'type' => $this->smallInteger()->notNull(),
         ], $tableOptions);
 
-        $this->createIndex('idx-table', DBManager::$tableName, 'table');
-        $this->createIndex('idx-field_name', DBManager::$tableName, 'field_name');
-        $this->createIndex('idx-type', DBManager::$tableName, 'type');
+        $this->createIndex('idx-table', DBManager::$defaultTableName, 'table');
+        $this->createIndex('idx-field_name', DBManager::$defaultTableName, 'field_name');
+        $this->createIndex('idx-type', DBManager::$defaultTableName, 'type');
     }
 
     public function down()
