@@ -38,7 +38,7 @@ If you don't want to save some fields, you can use property ignoreFields (exampl
             return [
                 'history' => [
                     'class' => \nhkey\arh\ActiveRecordHistoryBehavior::className(),
-                    'ignoreFields' = ['updated_at', 'some_other_field'],
+                    'ignoreFields' => ['updated_at', 'some_other_field'],
                 ],
                 ...
             ];
