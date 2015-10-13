@@ -10,7 +10,7 @@ use yii\helpers\FileHelper;
 
 
 /**
- * Class FileManager for save history in gilesystem
+ * Class FileManager for save history in filesystem
  * @package nhkey\arh
  */
 class FileManager extends BaseManager
