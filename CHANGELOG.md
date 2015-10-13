@@ -1,6 +1,12 @@
 Yii2-ActiveRecord-History Extension for Yii 2 ChangeLog
 ==============================================
 
+1.1.2 Oct 13, 2015
+-------------------------
+
+- Add save user_id as option (Issue #2)
+- Add docs
+
 1.1.1 Oct 13, 2015
 -------------------------
 

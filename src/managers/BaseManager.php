@@ -18,6 +18,11 @@ abstract class BaseManager implements ActiveRecordHistoryInterface
     public $updatedFields;
 
     /**
+     * @var boolean Flag for save current user_id in history
+     */
+    public $saveUserId = true;
+
+    /**
      * @inheritdoc
      */
     public function setOptions($options)
@@ -52,6 +57,9 @@ abstract class BaseManager implements ActiveRecordHistoryInterface
             'type' => $type,
             'date' => date('Y-m-d H:i:s', time()),
         ];
+
+        if ($this->saveUserId)
+            $data['user_id'] = Yii::$app->user->id;
 
         switch ($type) {
             case self::AR_INSERT:

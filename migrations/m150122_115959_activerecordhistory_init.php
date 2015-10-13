@@ -4,7 +4,6 @@
  * @author Mikhail Mikhalev
  */
 
-use yii\db\Schema;
 use yii\db\Migration;
 use nhkey\arh\managers\DBManager;
 
@@ -24,14 +23,14 @@ class m150122_115959_activerecordhistory_init extends Migration
         }
 
         $this->createTable(DBManager::$tableName, [
-            'id' => Schema::TYPE_BIGPK,
-            'date' => Schema::TYPE_DATETIME . ' NOT NULL',
-            'table' => Schema::TYPE_STRING . ' NOT NULL',
-            'field_name' => Schema::TYPE_STRING . ' NOT NULL',
-            'field_id' => Schema::TYPE_STRING . ' NOT NULL',
-            'old_value' => Schema::TYPE_TEXT . ' NULL',
-            'new_value' => Schema::TYPE_TEXT . ' NULL',
-            'type' => Schema::TYPE_SMALLINT . ' NOT NULL',
+            'id' => $this->bigPrimaryKey(),
+            'date' => $this->datetime()->notNull(),
+            'table' => $this->string()->notNull(),
+            'field_name' => $this->string()->notNull(),
+            'field_id' => $this->string()->notNull(),
+            'old_value' => $this->text(),
+            'new_value' => $this->text(),
+            'type' => $this->smallInteger()->notNull(),
         ], $tableOptions);
 
         $this->createIndex('idx-table', DBManager::$tableName, 'table');

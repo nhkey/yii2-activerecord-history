@@ -27,7 +27,9 @@ class FileManager extends BaseManager
     public function saveField($data)
     {
         $typeName = self::getTypeName($data['type']);
-        $content = "{$data['date']} {$typeName}: {$data['field_name']}({$data['field_id']})" . PHP_EOL;
+        if (!isset($data['user_id']))
+            $data['user_id'] = '';
+        $content = "{$data['date']} {$typeName} {$data['user_id']}: {$data['field_name']}({$data['field_id']})" . PHP_EOL;
 
         if ($data['type'] == self::AR_UPDATE || $data['type'] == self::AR_UPDATE_PK) {
             $content .= "Old Value: {$data['old_value']}" . PHP_EOL;

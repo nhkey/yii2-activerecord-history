@@ -33,163 +33,18 @@ Usage
 -----
 
 If the property is not specified, the default manager is DBManager.
-In the extension is two managers: DBManager and FileManager. You can extend the class BaseManager.
+In the extension is two managers: [DBManager](https://github.com/nhkey/yii2-activerecord-history/blob/master/docs/en/managers.md#DBManager) and [FileManager](https://github.com/nhkey/yii2-activerecord-history/blob/master/docs/en/managers.md#FileManager). You can extend the class BaseManager. 
 
-### 1) As behavior
+There are two way how usage this extension:
+ - [As behavior](https://github.com/nhkey/yii2-activerecord-history/blob/master/docs/en/usage-as-behavior.md)
+ - [As extend the class ActiveRecord](https://github.com/nhkey/yii2-activerecord-history/blob/master/docs/en/usage-as-extend.md) **DEPRECATED**
 
-Easy way:
- 
-```php
-    class MyClass extends ActiveRecord {
-     public function behaviors(){
-            return [
-                'history' => [
-                    'class' => \nhkey\arh\ActiveRecordHistoryBehavior::className(),
-                ],
-                ...
-            ];
-        }
+Update to 1.1.2
+-------
+For update you need to run: 
+
 ```
-
-If you want use not default manager or set options for manager, you may use this construction: 
-
-```php
-    class MyClass extends ActiveRecord {
-     public function behaviors(){
-            return [
-                'history' => [
-                    'class' => \nhkey\arh\ActiveRecordHistoryBehavior::className(),
-                    'manager' => 'ManagerName',
-                    'managerOptions' => [
-                        ...
-                    ],
-                ],
-                ...
-            ];
-        }
-```
-
-If you don't want to save some fields, you can use property ignoreFields (example, field "updated_at" if you use TimestampBehavior, [Issue #1](https://github.com/nhkey/yii2-activerecord-history/issues/1))
-
-```php
-    class MyClass extends ActiveRecord {
-     public function behaviors(){
-            return [
-                'history' => [
-                    'class' => \nhkey\arh\ActiveRecordHistoryBehavior::className(),
-                    'ignoreFields' = ['updated_at', 'some_other_field'],
-                ],
-                ...
-            ];
-        }
-```
-
-
-#### Example 1
-
-FileManager: 
-
-```php
-    class MyClass extends ActiveRecord {
-     public function behaviors(){
-            return [
-                'history' => [
-                    'class' => \nhkey\arh\ActiveRecordHistoryBehavior::className(),
-                    'manager' => '\nhkey\arh\managers\FileManager',
-                    'managerOptions' => [
-                        'filePath' => '/home/logs/',
-                        'isGenerateFilename' => true
-                    ],
-                ],
-                ...
-            ];
-        }
-```
-or
-
-```php
-    class MyClass extends ActiveRecord {
-     public function behaviors(){
-            return [
-                'history' => [
-                    'class' => \nhkey\arh\ActiveRecordHistoryBehavior::className(),
-                    'manager' => '\nhkey\arh\managers\FileManager',
-                    'managerOptions' => [
-                        'filename' => '/home/user/logs_app/MyClass.log',
-                    ],
-                ],
-                ...
-            ];
-        }
-```
-
-
-
-#### Example 2
-
-DBManager: 
-
-```php
-    class MyClass extends ActiveRecord {
-     public function behaviors(){
-            return [
-                'history' => [
-                    'class' => \nhkey\arh\ActiveRecordHistoryBehavior::className(),
-                    'manager' => '\nhkey\arh\managers\DBManager',
-                    'managerOptions' => [
-                        'tableName' => 'MyLogTable',
-                    ],
-                ],
-                ...
-            ];
-        }
-```
-
-
-### 2) As extend the class ActiveRecord
-
-**DEPRECATED, NOT SUPPORTED NOW**
-
-To use this extension, simply change the parent class from \yii\db\ActiveRecord to \nhkey\arh\ActiveRecordHistory 
-
-For example:
-
-```php
-    class MyClass extends ActiveRecord
-```
-
-change to
-
-```php
-    class MyClass extends ActiveRecordHistory
-```
-
-The model will have private property $_historyManager, which replies with a call for the Manager.
-
-#### Example 1
-
-FileManager:
-
-```php
-    class MyClass extends \nhkey\arh\ActiveRecordHistory
-    {
-        $_historyManager = '\nhkey\arh\managers\FileManager'
-        $_optionsHistoryManager = [
-            'filename' => '/home/user/MyClass.log',
-            ];
-        ...
-    }
-```
-
-#### Example 2
-
-DBManager:
-
-```php
-    class MyClass extends \nhkey\arh\ActiveRecordHistory
-    {
-        ...
-    }
+php yii migrate --migrationPath=@vendor/nhkey/yii2-activerecord-history/migrations
 ```
 
 Credits
