@@ -54,7 +54,7 @@ If you don't want to save some fields, you can use property ignoreFields (exampl
 
 ### Example 1
 
-[FileManager](https://github.com/nhkey/yii2-activerecord-history/blob/master/docs/en/managers.md#FileManager): 
+[FileManager](https://github.com/nhkey/yii2-activerecord-history/blob/master/docs/en/managers.md#filemanager): 
 
 ```php
     class MyClass extends ActiveRecord {
@@ -94,7 +94,7 @@ or
 
 #### Example 2
 
-[DBManager](https://github.com/nhkey/yii2-activerecord-history/blob/master/docs/en/managers.md#DBManager): 
+[DBManager](https://github.com/nhkey/yii2-activerecord-history/blob/master/docs/en/managers.md#dbmanager): 
 
 ```php
     class MyClass extends ActiveRecord {

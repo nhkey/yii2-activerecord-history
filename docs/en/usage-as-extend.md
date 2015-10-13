@@ -22,7 +22,7 @@ The model will have private property $_historyManager, which replies with a call
 
 #### Example 1
 
-[FileManager](https://github.com/nhkey/yii2-activerecord-history/blob/master/docs/en/managers#FileManager):
+[FileManager](https://github.com/nhkey/yii2-activerecord-history/blob/master/docs/en/managers#filemanager):
 
 ```php
     class MyClass extends \nhkey\arh\ActiveRecordHistory
@@ -37,7 +37,7 @@ The model will have private property $_historyManager, which replies with a call
 
 #### Example 2
 
-[DBManager](https://github.com/nhkey/yii2-activerecord-history/blob/master/docs/en/managers#DBManager):
+[DBManager](https://github.com/nhkey/yii2-activerecord-history/blob/master/docs/en/managers#dbmanager):
 
 ```php
     class MyClass extends \nhkey\arh\ActiveRecordHistory
