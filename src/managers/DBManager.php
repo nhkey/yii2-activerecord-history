@@ -17,16 +17,23 @@ use yii\di\Instance;
  */
 class DBManager extends BaseManager
 {
-    public static $defaultTableName = '{{%modelhistory}}'; // static default for migration
+    /**
+     * @var string static default for migration
+     */
+    public static $defaultTableName = '{{%modelhistory}}';
+
+    /**
+     * @var string tableName
+     */
     public $tableName;
 
     /**
-     * @var string
+     * @var string DB
      */
     public static $db = 'db';
 
     /**
-     * @param array $data
+     * @inheritdoc
      */
     public function saveField($data)
     {

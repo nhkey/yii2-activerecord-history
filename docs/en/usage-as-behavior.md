@@ -48,7 +48,14 @@ If you don't want to save some fields, you can use property ignoreFields (exampl
 ## Properties
 
 - **manager** - set manager for save history in storage.
-- **ignoreFields** - set array of fields  that do not need to save in history log
+- **ignoreFields** - set array of fields that do not need to save in history log
+- **eventsList** - set array of events that do need to save in history log. 
+
+##Events codes const
+- BaseManager::AR_INSERT - Create new ActiveRecord-object 
+- BaseManager::AR_UPDATE - Update your ActiveRecord-object 
+- BaseManager::AR_DELETE - Remove your ActiveRecord-object 
+- BaseManager::AR_UPDATE_PK - Update primary key for your ActiveRecord-object 
 
 ## Examples
 

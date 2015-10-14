@@ -26,17 +26,38 @@ class ActiveRecordHistoryBehavior extends Behavior
     public $ignoreFields = [];
 
     /**
+     * @var array Events List than saved in storage
+     */
+    public $eventsList = [BaseManager::AR_INSERT, BaseManager::AR_UPDATE, BaseManager::AR_DELETE, BaseManager::AR_UPDATE_PK];
+
+    /**
      * @var array options for manager
      */
     public $managerOptions;
 
+    /**
+     * @var array Get Yii2 event name from behavior event name
+     * @return array|string
+     */
+    public function getEventName($event){
+        $eventNames = [
+            BaseManager::AR_INSERT => BaseActiveRecord::EVENT_AFTER_INSERT,
+            BaseManager::AR_UPDATE => BaseActiveRecord::EVENT_AFTER_UPDATE,
+            BaseManager::AR_DELETE => BaseActiveRecord::EVENT_AFTER_DELETE,
+            BaseManager::AR_UPDATE_PK => BaseActiveRecord::EVENT_AFTER_UPDATE,
+
+        ];
+        return isset($eventNames[$event]) ? $eventNames[$event] : $eventNames;
+
+    }
+
     public function events()
     {
-        return [
-            BaseActiveRecord::EVENT_AFTER_INSERT => 'saveHistory',
-            BaseActiveRecord::EVENT_AFTER_UPDATE => 'saveHistory',
-            BaseActiveRecord::EVENT_AFTER_DELETE => 'saveHistory',
-        ];
+        $events = [];
+        foreach ($this->eventsList as $event){
+            $events[$this->getEventName($event)] = 'saveHistory';
+        }
+        return $events;
     }
 
     /**
@@ -55,14 +76,18 @@ class ActiveRecordHistoryBehavior extends Behavior
                 break;
 
             case BaseActiveRecord::EVENT_AFTER_UPDATE:
+
+                if (in_array(BaseManager::AR_UPDATE_PK, $this->eventsList) && ($this->owner->getOldPrimaryKey() != $this->owner->getPrimaryKey()))
+                    $type = $manager::AR_UPDATE_PK;
+                elseif (in_array(BaseManager::AR_UPDATE, $this->eventsList))
+                    $type = $manager::AR_UPDATE;
+                else
+                    return true;
+
                 $changedAttributes = $event->changedAttributes;
                 foreach ($this->ignoreFields as $ignoreField)
                     if (isset($changedAttributes[$ignoreField]))
                         unset($changedAttributes[$ignoreField]);
-
-                $type = $this->owner->getOldPrimaryKey() != $this->owner->getPrimaryKey()
-                    ? $manager::AR_UPDATE_PK
-                    : $manager::AR_UPDATE;
 
                 $manager->setUpdatedFields($changedAttributes);
                 break;
