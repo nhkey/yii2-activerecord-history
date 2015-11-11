@@ -40,6 +40,6 @@ class m150122_115959_activerecordhistory_init extends Migration
 
     public function down()
     {
-        $this->dropTable(DBManager::$tableName);
+        $this->dropTable(DBManager::$defaultTableName);
     }
 }
