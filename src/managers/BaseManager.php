@@ -68,6 +68,9 @@ abstract class BaseManager implements ActiveRecordHistoryInterface
                 break;
             case self::AR_UPDATE:
                 foreach ($this->updatedFields as $updatedFieldKey => $updatedFieldValue) {
+                    if ($updatedFieldValue == $object->$updatedFieldKey) {
+                        continue;
+                    }
                     $data['field_name'] = $updatedFieldKey;
                     $data['old_value'] = $updatedFieldValue;
                     $data['new_value'] = $object->$updatedFieldKey;
