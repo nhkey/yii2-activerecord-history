@@ -7,6 +7,7 @@
 namespace nhkey\arh;
 
 use nhkey\arh\managers\BaseManager;
+use nhkey\arh\managers\DBManager;
 use Yii;
 
 /**
@@ -27,6 +28,13 @@ class ActiveRecordHistory extends \yii\db\ActiveRecord
      */
     protected $_optionsHistoryManager;
 
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return DBManager::$defaultTableName;
+    }
 
     public function afterSave($insert, $changedAttributes)
     {
