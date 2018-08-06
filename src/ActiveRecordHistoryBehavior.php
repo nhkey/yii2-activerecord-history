@@ -86,7 +86,7 @@ class ActiveRecordHistoryBehavior extends Behavior
 
                 $changedAttributes = $event->changedAttributes;
                 foreach ($this->ignoreFields as $ignoreField)
-                    if (isset($changedAttributes[$ignoreField]))
+                    if (array_key_exists($ignoreField, $changedAttributes))
                         unset($changedAttributes[$ignoreField]);
 
                 $manager->setUpdatedFields($changedAttributes);
