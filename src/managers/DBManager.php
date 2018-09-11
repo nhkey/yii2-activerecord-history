@@ -6,8 +6,10 @@
 
 namespace nhkey\arh\managers;
 
+use const SORT_DESC;
 use Yii;
 use yii\db\Connection;
+use yii\db\Query;
 use yii\di\Instance;
 
 
@@ -32,19 +34,38 @@ class DBManager extends BaseManager
      */
     public static $db = 'db';
 
+    public function __construct()
+    {
+        $this->tableName = isset($this->tableName) ? $this->tableName : $this::$defaultTableName;
+    }
+
     /**
      * @inheritdoc
      */
     public function saveField($data)
     {
-        $table =  isset($this->tableName) ? $this->tableName : $this::$defaultTableName;
-        
         self::getDB()->createCommand()
-            ->insert($table, $data)->execute();
+            ->insert($this->tableName, $data)->execute();
     }
 
     /**
-     * @return object Return database connection
+     * Query for data record according to parameters
+     * @param array $filter
+     * @param array $order
+     * @return array|false
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\Exception
+     */
+    public function getField($filter, $order)
+    {
+        $query = new Query();
+        $query->select('*')->from($this->tableName)->andWhere($filter)->orderBy($order);
+        $res = $query->createCommand(self::getDB())->queryOne();
+        return $res;
+    }
+
+    /**
+     * @return Connection Return database connection
      * @throws \yii\base\InvalidConfigException
      */
     private static function getDB()

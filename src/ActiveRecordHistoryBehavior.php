@@ -102,5 +102,17 @@ class ActiveRecordHistoryBehavior extends Behavior
         $manager->run($type, $this->owner);
     }
 
+    /**
+     * Get the record corresponding to last change of an attribute
+     * @param $attribute
+     * @return mixed
+     */
+    public function lastChanged($attribute)
+    {
+        $manager = new $this->manager;
+        $manager->setOptions($this->managerOptions);
 
+        return $manager->getData($attribute, $this->owner);
+
+    }
 }

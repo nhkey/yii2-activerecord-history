@@ -52,5 +52,17 @@ class ActiveRecordHistory extends \yii\db\ActiveRecord
         return parent::afterDelete();
     }
 
+    /**
+     * Get the record corresponding to last change of an attribute
+     * @param $attribute
+     * @return mixed
+     */
+    public function lastChanged($attribute)
+    {
+        $manager = new $this->_historyManager;
+
+        return $manager->getData($attribute, $this);
+                
+    }
 
 }

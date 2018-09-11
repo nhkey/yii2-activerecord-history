@@ -89,4 +89,33 @@ abstract class BaseManager implements ActiveRecordHistoryInterface
         }
     }
 
+    /**
+     * Find the last data record corresponding to the changes of a specific attribute
+     * @param $attribute
+     * @param $object
+     * @return array
+     */
+    public function getData($attribute, $object)
+    {
+        $filter = [
+            'table' => $object->tableName(),
+            'field_id' => $object->getPrimaryKey(),
+            'field_name' => $attribute,
+        ];
+        $order = ['date' => SORT_DESC];
+        return $this->getField($filter, $order);
+    }
+
+    /**
+     * By default is not able to obtain the data record, the implementation is demanded to each specific implementation
+     * of the manager
+     * @param array $filter
+     * @param array $order
+     * @return array
+     */
+    public function getField(array $filter, array $order)
+    {
+        return [];
+    }
+
 }
