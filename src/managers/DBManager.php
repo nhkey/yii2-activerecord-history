@@ -56,7 +56,7 @@ class DBManager extends BaseManager
      * @throws \yii\base\InvalidConfigException
      * @throws \yii\db\Exception
      */
-    public function getField($filter, $order)
+    public function getField(array $filter, array $order)
     {
         $query = new Query();
         $query->select('*')->from($this->tableName)->andWhere($filter)->orderBy($order);
