@@ -113,6 +113,18 @@ class ActiveRecordHistoryBehavior extends Behavior
         $manager->setOptions($this->managerOptions);
 
         return $manager->getData($attribute, $this->owner);
+    }
 
+    /**
+     * Get the records corresponding to all changes
+     * @param $attribute
+     * @return mixed
+     */
+    public function changes()
+    {
+        $manager = new $this->manager;
+        $manager->setOptions($this->managerOptions);
+
+        return $manager->getAllData($this->owner);
     }
 }

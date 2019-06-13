@@ -7,6 +7,7 @@
 namespace nhkey\arh\managers;
 
 use Yii;
+use yii\base\ErrorException;
 
 
 abstract class BaseManager implements ActiveRecordHistoryInterface
@@ -94,6 +95,7 @@ abstract class BaseManager implements ActiveRecordHistoryInterface
      * @param $attribute
      * @param $object
      * @return array
+     * @throws ErrorException
      */
     public function getData($attribute, $object)
     {
@@ -107,15 +109,45 @@ abstract class BaseManager implements ActiveRecordHistoryInterface
     }
 
     /**
-     * By default is not able to obtain the data record, the implementation is demanded to each specific implementation
+     * Find the data records corresponding to the changes
+     * @param $object
+     * @return array
+     * @throws ErrorException
+     */
+    public function getAllData($object)
+    {
+        $filter = [
+            'table' => $object->tableName(),
+            'field_id' => $object->getPrimaryKey(),
+        ];
+        $order = ['date' => SORT_DESC];
+        return $this->getFields($filter, $order);
+    }
+
+    /**
+     * By default is not able to obtain the data record, the implementation is demanded to each specialization
      * of the manager
      * @param array $filter
      * @param array $order
      * @return array
+     * @throws ErrorException
      */
-    public function getField(array $filter, array $order)
+    protected function getField(array $filter, array $order)
     {
-        return [];
+       throw new ErrorException("Method not implemented");
+    }
+
+    /**
+     * By default is not able to obtain the data records, the implementation is demanded to each specialization
+     * of the manager
+     * @param array $filter
+     * @param array $order
+     * @return array
+     * @throws ErrorException
+     */
+    protected function getFields(array $filter, array $order)
+    {
+        throw new ErrorException("Method not implemented");
     }
 
 }

@@ -8,6 +8,7 @@ namespace nhkey\arh\managers;
 
 use const SORT_DESC;
 use Yii;
+use yii\db\ActiveQuery;
 use yii\db\Connection;
 use yii\db\Query;
 use yii\di\Instance;
@@ -56,12 +57,35 @@ class DBManager extends BaseManager
      * @throws \yii\base\InvalidConfigException
      * @throws \yii\db\Exception
      */
-    public function getField(array $filter, array $order)
+    protected function getField(array $filter, array $order)
+    {
+        return $this->prepareQuery($filter, $order)->queryOne();
+    }
+
+    /**
+     * Query for data records according to parameters
+     * @param array $filter
+     * @param array $order
+     * @return array|false
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\Exception
+     */
+    protected function getFields(array $filter, array $order)
+    {
+        return $this->prepareQuery($filter, $order)->queryAll();
+    }
+
+    /**
+     * @param array $filter
+     * @param array $order
+     * @return \yii\db\Command
+     * @throws \yii\base\InvalidConfigException
+     */
+    private function prepareQuery(array $filter, array $order)
     {
         $query = new Query();
         $query->select('*')->from($this->tableName)->andWhere($filter)->orderBy($order);
-        $res = $query->createCommand(self::getDB())->queryOne();
-        return $res;
+        return $query->createCommand(self::getDB());
     }
 
     /**

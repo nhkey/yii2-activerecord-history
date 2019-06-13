@@ -45,6 +45,16 @@ If you don't want to save some fields, you can use property ignoreFields (exampl
         }
 ```
 
+If you want to optain the log record corresponding to the last change of a model attribute just call on the model the function `lastChanged(ATTRIBUTE_NAME)`:
+```php
+    $model->lastChanged("name");
+```
+
+If you want to optain the log records corresponding to all the changes of a model just call on the model the function `changes()`:
+```php
+    $model->changes();
+```
+
 ## Properties
 
 - **manager** - set manager for save history in storage.

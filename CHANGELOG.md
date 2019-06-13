@@ -1,6 +1,13 @@
 Yii2-ActiveRecord-History Extension for Yii 2 ChangeLog
 ==============================================
 
+1.2 Jun 13, 2019
+-------------------------
+
+- Optain the last change of a model attribute
+- Optain all the changes of a model
+- Add docs
+
 1.1.2.1 Oct 13, 2015
 -------------------------
 

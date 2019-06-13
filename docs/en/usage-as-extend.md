@@ -20,6 +20,17 @@ change to
 
 The model will have private property $_historyManager, which replies with a call for the Manager.
 
+If you want to optain the log record corresponding to the last change of a model attribute just call on the model the function `lastChanged(ATTRIBUTE_NAME)`:
+```php
+    $model->lastChanged("name");
+```
+
+If you want to optain the log records corresponding to all the changes of a model just call on the model the function `changes()`:
+```php
+    $model->changes();
+```
+
+
 #### Example 1
 
 [FileManager](https://github.com/nhkey/yii2-activerecord-history/blob/master/docs/en/managers#filemanager):
