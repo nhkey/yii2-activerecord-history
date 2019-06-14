@@ -23,7 +23,7 @@ class ActiveRecordHistoryController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'roles' => $this->module->allowedRoles,
+                        'roles' => $this->module->allowedPermissions,
                         'allow' => true,
                     ],
                 ],

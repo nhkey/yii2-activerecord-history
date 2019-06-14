@@ -15,5 +15,5 @@ class Module extends BaseModule
 {
     public $controllerNamespace = 'nhkey\arh\controllers';
 
-    public $allowedRoles = [];
+    public $allowedPermissions = [];
 }

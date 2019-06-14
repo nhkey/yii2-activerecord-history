@@ -131,3 +131,14 @@ or
 
 
 [Back To Main page](https://github.com/nhkey/yii2-activerecord-history/blob/master/README.md)
+
+## Controller ActiveRecordHistory
+Provides some actions for common utilities, for example to display all the changes of a model you can call
+the action `model-changes`:
+```php
+Url::to([
+    'arh/active-record-history/model-changes',
+    'class' => [MODEL_CLASS_NAMESPACE],
+    'field_id' => [MODEL_ID]
+    );
+```
