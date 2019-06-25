@@ -57,6 +57,7 @@ abstract class BaseManager implements ActiveRecordHistoryInterface
             'field_id' => $object->getPrimaryKey(),
             'type' => $type,
             'date' => date('Y-m-d H:i:s', time()),
+            'action' => Yii::$app->requestedRoute,
         ];
 
         if ($this->saveUserId)
