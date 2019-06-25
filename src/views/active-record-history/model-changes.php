@@ -14,5 +14,6 @@ echo GridView::widget([
         'new_value',
         'type',
         'user_id',
+        'action',
     ],
 ]);
