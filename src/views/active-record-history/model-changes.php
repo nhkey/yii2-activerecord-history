@@ -10,7 +10,7 @@ echo GridView::widget([
     'columns' => [
         'date:datetime',
         'field_name',
-        'odl_value',
+        'old_value',
         'new_value',
         'type',
         'user_id',
