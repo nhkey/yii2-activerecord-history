@@ -15,7 +15,11 @@ class m190316_221539_drop_not_null_user extends Migration
      */
     public function safeUp()
     {
-        $this->alterColumn(DBManager::$defaultTableName, 'user_id', $this->string());
+        if ($this->db->driverName === 'mysql') {
+            $this->alterColumn(DBManager::$defaultTableName, 'user_id', $this->string());
+        }else{
+            $this->alterColumn(DBManager::$defaultTableName, 'user_id', 'DROP NOT NULL');
+        }
     }
 
     /**
@@ -23,7 +27,12 @@ class m190316_221539_drop_not_null_user extends Migration
      */
     public function safeDown()
     {
-        $this->alterColumn(DBManager::$defaultTableName, 'user_id', $this->string()->notNull());
+        if ($this->db->driverName === 'mysql') {
+            $this->alterColumn(DBManager::$defaultTableName, 'user_id', $this->string()->notNull());
+        }else{
+            echo "m190316_221539_drop_not_null_user cannot be reverted.\n";
+            return false;
+        }
     }
 
     /*
