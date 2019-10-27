@@ -29,6 +29,14 @@ If you are using DBManager as Manager, you need to run
 php yii migrate --migrationPath=@vendor/nhkey/yii2-activerecord-history/migrations
 ```
 
+Add in `config/web.php` in the modules section the configuration.
+```php
+    'arh' =>  [
+        'class' => '\nhkey\arh\Module',
+        'allowedPermissions' => ['visualizzaStoricoModifiche']
+    ],
+```
+
 Usage
 -----
 

@@ -7,6 +7,7 @@
 namespace nhkey\arh\managers;
 
 use Yii;
+use yii\base\ErrorException;
 
 
 abstract class BaseManager implements ActiveRecordHistoryInterface
@@ -56,6 +57,7 @@ abstract class BaseManager implements ActiveRecordHistoryInterface
             'field_id' => $object->getPrimaryKey(),
             'type' => $type,
             'date' => date('Y-m-d H:i:s', time()),
+            'action' => Yii::$app->requestedRoute,
         ];
 
         if ($this->saveUserId)
@@ -87,6 +89,66 @@ abstract class BaseManager implements ActiveRecordHistoryInterface
                 $this->saveField($data);
                 break;
         }
+    }
+
+    /**
+     * Find the last data record corresponding to the changes of a specific attribute
+     * @param $attribute
+     * @param $object
+     * @return array
+     * @throws ErrorException
+     */
+    public function getData($attribute, $object)
+    {
+        $filter = [
+            'table' => $object->tableName(),
+            'field_id' => $object->getPrimaryKey(),
+            'field_name' => $attribute,
+        ];
+        $order = ['date' => SORT_DESC];
+        return $this->getField($filter, $order);
+    }
+
+    /**
+     * Find the data records corresponding to the changes
+     * @param $object
+     * @return array
+     * @throws ErrorException
+     */
+    public function getAllData($object)
+    {
+        $filter = [
+            'table' => $object->tableName(),
+            'field_id' => $object->getPrimaryKey(),
+        ];
+        $order = ['date' => SORT_DESC, 'type' => SORT_DESC];
+        return $this->getFields($filter, $order);
+    }
+
+    /**
+     * By default is not able to obtain the data record, the implementation is demanded to each specialization
+     * of the manager
+     * @param array $filter
+     * @param array $order
+     * @return array
+     * @throws ErrorException
+     */
+    protected function getField(array $filter, array $order)
+    {
+       throw new ErrorException("Method not implemented");
+    }
+
+    /**
+     * By default is not able to obtain the data records, the implementation is demanded to each specialization
+     * of the manager
+     * @param array $filter
+     * @param array $order
+     * @return array
+     * @throws ErrorException
+     */
+    protected function getFields(array $filter, array $order)
+    {
+        throw new ErrorException("Method not implemented");
     }
 
 }
