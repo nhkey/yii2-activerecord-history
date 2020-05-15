@@ -78,6 +78,7 @@ abstract class BaseManager implements ActiveRecordHistoryInterface
                 break;
             case self::AR_DELETE:
                 $data['field_name'] = $pk;
+                $data['old_value'] = $pk;
                 $this->saveField($data);
                 break;
             case self::AR_UPDATE_PK:
