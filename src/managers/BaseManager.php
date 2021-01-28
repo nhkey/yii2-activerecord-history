@@ -58,8 +58,11 @@ abstract class BaseManager implements ActiveRecordHistoryInterface
             'date' => date('Y-m-d H:i:s', time()),
         ];
 
-        if ($this->saveUserId)
-            $data['user_id'] = isset(Yii::$app->user->id) ?  Yii::$app->user->id : '';
+        if ($this->saveUserId) {
+            if (isset(\Yii::$app->user)) {
+                $data['user_id'] = Yii::$app->user->id;
+            }
+        }
 
         switch ($type) {
             case self::AR_INSERT:
@@ -71,7 +74,7 @@ abstract class BaseManager implements ActiveRecordHistoryInterface
                     $data['field_name'] = $updatedFieldKey;
                     $data['old_value'] = $updatedFieldValue;
                     $data['new_value'] = $object->$updatedFieldKey;
-                    if($data['old_value'] != $data['new_value']){
+                    if ($data['old_value'] != $data['new_value']) {
                         $this->saveField($data);
                     }
                 }
